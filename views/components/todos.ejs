@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Todo List</title>
+     <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<html>
+<style>
+     .checkbox {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+     }
+
+     .btnblock {
+          display: flex;
+          gap: 10px;
+     }
+
+     .block {
+          width: 100%;
+          border-bottom: 2px solid grey;
+          padding: 2px 6px;
+          padding-bottom: 4px;
+          display: flex;
+
+          justify-content: space-between;
+          align-items: center;
+     }
+</style>
+</head>
+
+<body>
+     <div class="todopanel">
+          <div class="leftpane">
+               <div class="main-heading">
+                    <div class="task-heading">T</div>
+                    <div class="task-heading">A</div>
+                    <div class="task-heading">S</div>
+                    <div class="task-heading">K</div>
+                    <div class="task-heading" style="margin-left: 4px;">L</div>
+                    <div class="task-heading">I</div>
+                    <div class="task-heading">S</div>
+                    <div class="task-heading">T</div>
+               </div>
+               <p>
+                   List of task . Complete the pending task!
+                   Tick the Completed Task soon....
+               </p>
+               <div id="displaytasks"></div>
+          </div>
+          <div class="rightpane">
+               <div class="main-heading">
+                    <div class="task-heading">T</div>
+                    <div class="task-heading">A</div>
+                    <div class="task-heading">S</div>
+                    <div class="task-heading">K</div>
+                    <div class="task-heading" style="margin-left: 4px;">F</div>
+                    <div class="task-heading">O</div>
+                    <div class="task-heading">R</div>
+                    <div class="task-heading">M</div>
+               </div>
+               <form action="/addnewtodo" method="post" enctype="multipart/form-data">
+
+                    <label for="task-title">Enter your tasks here
+
+                         <input type="text" required placeholder="like->study" id="task-title" name="tasktitle">
+                    </label>
+
+                    <input type="file" required name="photo" id="photo">
+                    <br>
+                    <button type="submit" id="add-todo">Add Task</button>
+
+               </form>
+          </div>
+     </div>
+     <script>
+          const input = document.getElementById("task-title");
+          const file = document.getElementById("photo");
+          const todobtn = document.getElementById("add-todo");
+          const username = "<%= username %>";
+          const email = "<%= useremail %>";
+          async function Getalltodos(user) {
+
+               fetch("http://localhost:8000/todos?useremail=" + user).
+                    then(response => {
+                         if (response.status !== 200)
+                              throw new Error("Something went wrong")
+                         return response.json()
+                    }).
+                    then(todos => {
+                         const { data } = todos;
+                         console.log(data);
+                         const todoList = document.getElementById("displaytasks");
+                         todoList.textContent = "";
+                         data.forEach(element => {
+                              const newTodoelement = document.createElement("div");
+                              newTodoelement.classList.add("block");
+                              const title = document.createElement("p");
+                              const checkBox = document.createElement("input");
+                              checkBox.setAttribute('type', 'checkbox');
+                              checkBox.classList.add("checkbox");
+                              checkBox.addEventListener('click', () => {
+                                   markTodo(element);
+                              })
+                              var button = document.createElement("input");
+                              button.type = "button";
+                              button.value = "❌";
+                              button.addEventListener('click', () => {
+                                   deleteTodo(element);
+                              })
+                              button.value = "❌";
+                              const image = document.createElement("img")
+                              image.src = element.image;
+                              title.innerText = element.title;
+                              title.style.fontSize = "22px"
+                              title.style.fontWeight = "500"
+                              title.style.width = "28%"
+                              if (element.isDone) {
+                                   title.style.textDecoration = "line-through"
+                                   checkBox.checked = true
+                              }
+                              const btnblock = document.createElement("div");
+                              btnblock.appendChild(checkBox);
+                              btnblock.appendChild(button);
+                              btnblock.classList.add("btnblock")
+                              newTodoelement.appendChild(title);
+                              newTodoelement.appendChild(image);
+                              image.style.width = "40px";
+                              image.style.height = "40px"
+                              image.style.objectFit = "cover"
+                              newTodoelement.appendChild(btnblock);
+                              todoList.appendChild(newTodoelement);
+                         });
+                    }).catch(err)
+               {
+                    alert(err)
+               }
+          }
+
+
+          async function markTodo(val) {
+               await fetch("http://localhost:8000/markTodo", {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                         "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(val),
+               }).then((res) => {
+                    return res.json();
+               }).then((res) => {
+                    alert(res.message)
+                    Getalltodos(email)
+               }).catch((err) => {
+                    alert(err)
+               })
+          }
+
+          async function deleteTodo(val) {
+               await fetch("http://localhost:8000/delete", {
+                    method: "DELETE",
+                    mode: "cors",
+                    headers: {
+                         "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(val),
+               }).then((res) => {
+                    return res.json();
+               }).then((res) => {
+                    alert(res.message)
+                    Getalltodos(email)
+               }).catch((err) => {
+                    alert(err)
+               })
+          }
+
+          Getalltodos(email);
+     </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Dashboard</title>
+     <style>
+          .wrapper {
+               background-color: yellowgreen;
+          }
+     </style>
+</head>
+
+<body>
+     <%- include("components/header", { username:user.firstname }) %>
+          <%- include("components/todos" ,{username:user.firstname,useremail:user.email})%>
+
+
+</body>
+
+</html>

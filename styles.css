@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+    margin: 0%;
+    padding: 0;
+  }
+  body {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    background-image: linear-gradient(to right, white, rgb(226, 217, 238));
+    font-size: large;
+    font-weight: 500;
+    line-height: 1.3rem;
+  }
+  .todopanel {
+    display: flex;
+    max-width: 1350px;
+    margin: 0 auto;
+    margin-top: 100px;
+    justify-content: space-between;
+  }
+  .leftpane {
+    padding: 18px;
+    max-width: 650px;
+    box-shadow: 2px 4px 14px grey;
+    min-height: 500px;
+  }
+  .rightpane {
+    padding: 20px;
+    max-width: 650px;
+    box-shadow: 2px 4px 14px grey;
+  }
+  .main-heading {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .task-heading {
+    padding: 14px;
+    font-size: x-large;
+    background-color:#DE6834;
+    border: 0 solid;
+    color: white;
+  }
+  #task-title,
+  #name-detail {
+    margin: 14px 0;
+    width: 100%;
+    font-size: large;
+    padding: 6px;
+    border: none;
+    border-bottom: 2px solid grey;
+    border-bottom-width: 1px grey;
+    outline: none;
+    background-color: transparent;
+  }
+  #add-todo {
+    margin-top: 14px;
+    background-color:#DE6834;
+    padding: 8px 18px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: large;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  #add-todo:hover {
+    background-color:#DE6834;
+  
+    transform: scale(1.08);
+  }
+  #displaytasks {
+    margin-top: 12px;
+    width: 100%;
+    padding: 12px;
+    line-height: 20px;
+  }
+  .todo-element-display {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(175, 175, 175);
+    padding: 4px;
+  }
+  .btn-of-todo {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .checkbox-btn {
+    width: 20px;
+    height: 20px;
+  }

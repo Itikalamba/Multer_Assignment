@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>SignUp</title>
+
+     <style>
+          * {
+               padding: 0;
+               box-sizing: border-box;
+               margin: 0;
+               font-family: Cambria, Cochin, Times, 'Times New Roman', serif;
+          }
+
+          .section {
+
+               margin-top: 22px;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+          }
+
+          .rightsection {
+               display: flex;
+               flex-direction: column;
+               padding: 30px;
+               padding-top: 50px;
+               margin-top: 40px;
+               height: 600px;
+               width: 400px;
+               gap: 8px;
+               border: 2px solid whitesmoke;
+               border-radius: 10px;
+
+          }
+
+
+          #login {
+               background-color:#DE6834;
+               width: 100%;
+               border: none;
+               padding: 8px;
+               color: white;
+               font-size: larger;
+               font-weight: bold;
+               border-radius: 4px;
+               margin-top: 2rem;
+               cursor: pointer;
+          }
+
+          #signup {
+               color: #DE6834;
+               font-family: Georgia, 'Times New Roman', Times, serif;
+               font-weight: bolder;
+               text-decoration: underline;
+               cursor: pointer;
+          }
+
+          input {
+               width: 100%;
+               padding: 0.4rem;
+               font-size: 0.9rem;
+               outline: none;
+               border: 2px solid rgb(167, 167, 167);
+
+               border-radius: 4px;
+               margin: 0.4rem 0;
+          }
+
+          .inputlabel {
+               font-size: 1.2rem;
+               margin: 0.4rem 0;
+               font-weight: 800;
+          }
+
+          #siguptext {
+               color: gray;
+               font-size: 1rem;
+               font-weight: 500;
+          }
+
+          #signup:hover {
+               color: #DE6834;
+
+               transform: scale(1.08);
+          }
+
+          #login:hover {
+               background-color: #DE6834;
+
+               transform: scale(1.08);
+          }
+     </style>
+</head>
+
+<body>
+
+     <div class="section">
+
+          <div class="rightsection">
+               <h1>Sign Up</h1>
+               <p id="siguptext">Already have an account ? <a href="http://localhost:8000/login">
+                         <span id="signup">Login </span>
+                    </a> </p>
+               <form action="/signup" method="post">
+
+                    <div>
+                         <div class="inputlabel">Email Address</div>
+                         <input required type="text" name="email" placeholder="name@example.com">
+                    </div>
+                    <div>
+                         <div class="inputlabel">First Name:</div>
+                         <input required type="text" name="firstname" placeholder="firstname">
+                    </div>
+                    <div>
+                         <div class="inputlabel">Last Name:</div>
+                         <input required type="text" name="lastname" placeholder="lastname">
+                    </div>
+                    <div>
+                         <div class="inputlabel">Password</div>
+                         <input required type="password" name="password" placeholder="strong password">
+                    </div>
+                    <% if (error) { %>
+                         <p style="color: red">
+                              <%= error %>
+                         </p>
+                         <% } %>
+                              <button type="submit" id="login">Create Account</button>
+
+               </form>
+          </div>
+     </div>
+</body>
+
+</html>

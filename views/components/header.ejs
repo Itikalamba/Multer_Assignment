@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          * {
+               margin: 0;
+               padding: 0;
+               font-family: Cambria, Cochin, Times, 'Times New Roman', serif;
+          }
+
+          .wrapper {
+
+               background-color: #DE6834;
+          }
+
+          nav {
+               padding: 14px 0;
+               color: white;
+               max-width: 1300px;
+               margin: 0 auto;
+               display: flex;
+               justify-content: space-between;
+
+          }
+
+          button {
+               padding: 5px;
+               color: #DE6834;
+               font-weight: bold;
+               font-size: large;
+               cursor: pointer;
+               border: 1px solid white;
+               border-radius: 3px;
+          }
+
+          a {
+               text-decoration: none;
+          }
+     </style>
+
+</head>
+
+<body>
+     <div class="wrapper">
+
+          <nav>
+               <h1>
+                    Logged in as <%= username %>
+               </h1>
+               <button id="logout"><a href="http://localhost:8000/logout">
+                         Log Out
+                    </a></button>
+          </nav>
+     </div>
+</body>
+<script>
+
+</script>
+
+</html>
